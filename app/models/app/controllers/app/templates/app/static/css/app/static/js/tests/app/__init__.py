@@ -1,5 +1,4 @@
-
-from flask import Flask
+from flask import Flask, render_template
 
 def create_app():
     app = Flask(__name__)
@@ -8,9 +7,6 @@ def create_app():
 
     @app.route("/")
     def index():
-        return {
-            "projeto": "Projeto Include",
-            "mensagem": "Aplicação iniciada com sucesso!"
-        }
+        return render_template("index.html")
 
     return app
