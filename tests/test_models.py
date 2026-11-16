@@ -16,7 +16,12 @@ def test_criar_e_consultar_aluno(monkeypatch):
         db.session.add(turma)
         db.session.commit()
 
-        aluno = Aluno(nome="Aluno de Teste", turma_id=turma.id)
+        aluno = Aluno(
+    nome="Aluno de Teste",
+    idade=12,
+    responsavel="Responsável de Teste",
+    turma_id=turma.id
+)
         db.session.add(aluno)
         db.session.commit()
 

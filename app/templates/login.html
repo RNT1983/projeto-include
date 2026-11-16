@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrativo - Projeto Include</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Projeto Include</h1>
+        <p>Acesso administrativo</p>
+    </header>
+
+    <main>
+        <h2>Entrar no sistema</h2>
+        <p>Informe a senha administrativa para acessar os cadastros.</p>
+
+        {% if erro %}
+            <p role="alert">{{ erro }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <label for="senha">Senha:</label>
+            <input
+                type="password"
+                id="senha"
+                name="senha"
+                required
+                autocomplete="current-password"
+            >
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p>
+            <a href="{{ url_for('index') }}">Voltar à página inicial</a>
+        </p>
+    </main>
+</body>
+</html>

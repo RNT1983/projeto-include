@@ -1,3 +1,5 @@
+
+/* Configurações gerais */
 * {
     margin: 0;
     padding: 0;
@@ -6,13 +8,14 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #263238;
+    background-color: #f0f5fa;
+    color: #263747;
     line-height: 1.6;
 }
 
+/* Cabeçalho */
 header {
-    background-color: #176b5b;
+    background-color: #174a7e;
     color: #ffffff;
     padding: 30px 20px;
     text-align: center;
@@ -22,7 +25,9 @@ header h1 {
     margin-bottom: 8px;
 }
 
+/* Conteúdo principal */
 main {
+    width: calc(100% - 40px);
     max-width: 900px;
     margin: 40px auto;
     padding: 30px;
@@ -30,6 +35,62 @@ main {
     border-radius: 12px;
 }
 
+/* Títulos e parágrafos */
+main h2 {
+    color: #174a7e;
+    margin-bottom: 12px;
+}
+
+main h3 {
+    color: #174a7e;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+main p {
+    margin-bottom: 12px;
+}
+
+main hr {
+    border: none;
+    border-top: 1px solid #d5e0eb;
+    margin: 25px 0;
+}
+
+/* Acessibilidade */
+section[aria-labelledby="acessibilidade-titulo"] {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #f0f5fa;
+    border-radius: 10px;
+}
+
+section button {
+    padding: 10px 18px;
+    margin: 8px 5px 8px 0;
+    background-color: #dceafa;
+    color: #174a7e;
+    border: 2px solid #174a7e;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+section button:hover {
+    background-color: #174a7e;
+    color: #ffffff;
+}
+
+/* Destaque de foco */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #f0a500;
+    outline-offset: 3px;
+}
+
+/* Navegação */
 nav {
     margin-top: 25px;
 }
@@ -44,21 +105,149 @@ nav ul {
 nav a {
     display: inline-block;
     padding: 12px 20px;
-    background-color: #e0f2ed;
-    color: #176b5b;
+    background-color: #dceafa;
+    color: #174a7e;
     text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
 }
 
 nav a:hover {
-    background-color: #176b5b;
+    background-color: #174a7e;
     color: #ffffff;
 }
 
+/* Formulários de alunos e cursos */
+#form-aluno,
+#form-curso {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Rótulos dos campos */
+#form-aluno label,
+#form-curso label {
+    display: block;
+    font-weight: bold;
+    color: #174a7e;
+    margin-top: 10px;
+}
+
+/* Campos de texto, números e seleção */
+#form-aluno input:not([type="hidden"]),
+#form-curso input:not([type="hidden"]),
+#form-aluno select,
+#form-curso select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b8c9d9;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #263747;
+}
+
+/* Foco nos campos */
+#form-aluno input:focus,
+#form-curso input:focus,
+#form-aluno select:focus,
+#form-curso select:focus {
+    border-color: #174a7e;
+}
+
+/* Botões dos formulários */
+#form-aluno button,
+#form-curso button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #174a7e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Efeito ao passar o mouse */
+#form-aluno button:hover,
+#form-curso button:hover {
+    background-color: #10365d;
+}
+
+/* Itens da lista de alunos */
+.item-aluno {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #d5e0eb;
+    border-radius: 8px;
+    list-style: none;
+    background-color: #ffffff;
+}
+
+/* Informações do aluno */
+.dados-aluno {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+/* Área dos botões */
+.acoes-aluno {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Formulário de exclusão */
+.acoes-aluno form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo comum dos botões */
+.botao-editar,
+.botao-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 16px;
+    margin: 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Botão Editar */
+.botao-editar {
+    background-color: #174a7e;
+    color: #ffffff;
+}
+
+.botao-editar:hover {
+    background-color: #10365d;
+}
+
+/* Botão Excluir */
+.botao-excluir {
+    background-color: #b83232;
+    color: #ffffff;
+}
+
+.botao-excluir:hover {
+    background-color: #922626;
+}
+
+/* Responsividade */
 @media (max-width: 600px) {
     main {
-        margin: 20px;
+        width: calc(100% - 24px);
+        margin: 20px auto;
         padding: 20px;
     }
 
@@ -69,5 +258,14 @@ nav a:hover {
     nav a {
         display: block;
         text-align: center;
+    }
+
+    .acoes-aluno {
+        flex-wrap: wrap;
+    }
+
+    #form-aluno,
+    #form-curso {
+        width: 100%;
     }
 }
