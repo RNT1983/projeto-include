@@ -4,122 +4,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Alunos - Projeto Include</title>
+    <meta name="theme-color" content="#123d68">
+    <title>Gestão de Alunos | Projeto Include</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header>
-        <h1>Projeto Include</h1>
-        <p>Cadastro de Alunos</p>
+
+<body class="pagina-interna">
+
+    <header class="cabecalho-interno">
+        <div class="cabecalho-conteudo">
+            <a class="marca" href="{{ url_for('index') }}">
+                <span class="marca-simbolo" aria-hidden="true">✦</span>
+                <span>Projeto <strong>Include</strong></span>
+            </a>
+
+            <div class="acoes-cabecalho">
+                <a class="link-inicio" href="{{ url_for('index') }}">
+                    ← Página inicial
+                </a>
+
+                <form method="POST" action="{{ url_for('logout') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="botao-sair">Sair do sistema</button>
+                </form>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <!-- Encerrar sessão administrativa -->
-        <form method="POST" action="{{ url_for('logout') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <button type="submit">Sair do sistema</button>
-        </form>
+    <main class="conteudo-interno">
 
-        <h2>Novo Aluno</h2>
-        <p>Preencha os dados para cadastrar um aluno.</p>
+        <section class="banner-interno" aria-labelledby="titulo-alunos">
+            <div class="banner-texto">
+                <span class="etiqueta">GESTÃO EDUCACIONAL</span>
+                <h1 id="titulo-alunos">Gestão de Alunos</h1>
+                <p>
+                    Organize os cadastros e acompanhe as informações
+                    dos alunos de forma simples e acessível.
+                </p>
+            </div>
 
-        <form id="form-aluno" method="POST" action="{{ url_for('alunos') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="banner-imagem">
+                <img
+                    src="{{ url_for('static', filename='images/estudantes-include.png') }}"
+                    alt="Estudantes colaborando em um ambiente de aprendizagem inclusivo"
+                >
+            </div>
+        </section>
 
-            <label for="nome">Nome do aluno *</label>
-            <input type="text" id="nome" name="nome" required>
+        <section class="painel-interno" aria-labelledby="titulo-cadastro">
+            <div class="painel-cabecalho">
+                <span class="secao-etiqueta">CADASTRO</span>
+                <h2 id="titulo-cadastro">Cadastrar novo aluno</h2>
+                <p>Preencha os dados abaixo. Os campos com * são obrigatórios.</p>
+            </div>
 
-            <label for="idade">Idade *</label>
-            <input type="number" id="idade" name="idade" min="1" max="120" required>
+            <form id="form-aluno" method="POST" action="{{ url_for('alunos') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-            <label for="responsavel">Nome do responsável *</label>
-            <input type="text" id="responsavel" name="responsavel" required>
+                <div class="grupo-campos">
+                    <div class="campo-formulario campo-largo">
+                        <label for="nome">Nome do aluno *</label>
+                        <input type="text" id="nome" name="nome"
+                               autocomplete="name" required>
+                    </div>
 
-            <label for="cpf">CPF (opcional)</label>
-            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00">
+                    <div class="campo-formulario">
+                        <label for="idade">Idade *</label>
+                        <input type="number" id="idade" name="idade"
+                               min="1" max="120" required>
+                    </div>
 
-            <label for="endereco">Endereço (opcional)</label>
-            <input type="text" id="endereco" name="endereco" placeholder="Rua, número e bairro">
+                    <div class="campo-formulario">
+                        <label for="responsavel">Nome do responsável *</label>
+                        <input type="text" id="responsavel"
+                               name="responsavel" required>
+                    </div>
 
-            <hr>
+                    <div class="campo-formulario">
+                        <label for="cpf">CPF (opcional)</label>
+                        <input type="text" id="cpf" name="cpf"
+                               placeholder="000.000.000-00">
+                    </div>
 
-            <h3>Informações complementares (opcionais)</h3>
-            <p>Preencha somente quando necessário e com conhecimento do responsável.</p>
+                    <div class="campo-formulario campo-largo">
+                        <label for="endereco">Endereço (opcional)</label>
+                        <input type="text" id="endereco" name="endereco"
+                               placeholder="Rua, número e bairro">
+                    </div>
+                </div>
 
-            <label for="deficiencia_fisica">Possui deficiência física?</label>
-            <select id="deficiencia_fisica" name="deficiencia_fisica">
-                <option value="">Não informado</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select>
+                <div class="divisor-formulario">
+                    <h3>Informações complementares</h3>
+                    <p>
+                        Campos opcionais. Preencha somente quando necessário
+                        e com conhecimento do responsável.
+                    </p>
+                </div>
 
-            <label for="deficiencia_intelectual">Possui deficiência intelectual?</label>
-            <select id="deficiencia_intelectual" name="deficiencia_intelectual">
-                <option value="">Não informado</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select>
+                <div class="grupo-campos">
+                    <div class="campo-formulario">
+                        <label for="deficiencia_fisica">Possui deficiência física?</label>
+                        <select id="deficiencia_fisica" name="deficiencia_fisica">
+                            <option value="">Não informado</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
 
-            <label for="tea">Possui informação de TEA?</label>
-            <select id="tea" name="tea">
-                <option value="">Não informado</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select>
+                    <div class="campo-formulario">
+                        <label for="deficiencia_intelectual">Possui deficiência intelectual?</label>
+                        <select id="deficiencia_intelectual" name="deficiencia_intelectual">
+                            <option value="">Não informado</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
 
-            <label for="recebe_beneficio">Recebe benefício social?</label>
-            <select id="recebe_beneficio" name="recebe_beneficio">
-                <option value="">Não informado</option>
-                <option value="sim">Sim</option>
-                <option value="nao">Não</option>
-            </select>
+                    <div class="campo-formulario">
+                        <label for="tea">Possui informação de TEA?</label>
+                        <select id="tea" name="tea">
+                            <option value="">Não informado</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
 
-            <label for="tipo_beneficio">Tipo de benefício (opcional)</label>
-            <input type="text" id="tipo_beneficio" name="tipo_beneficio"
-                   placeholder="Informe o tipo, se necessário">
+                    <div class="campo-formulario">
+                        <label for="recebe_beneficio">Recebe benefício social?</label>
+                        <select id="recebe_beneficio" name="recebe_beneficio">
+                            <option value="">Não informado</option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                        </select>
+                    </div>
 
-            <button type="submit">Cadastrar aluno</button>
-        </form>
+                    <div class="campo-formulario campo-largo">
+                        <label for="tipo_beneficio">Tipo de benefício (opcional)</label>
+                        <input type="text" id="tipo_beneficio"
+                               name="tipo_beneficio"
+                               placeholder="Informe o tipo, se necessário">
+                    </div>
+                </div>
 
-        <hr>
+                <div class="rodape-formulario">
+                    <button type="submit" class="botao-cadastrar">
+                        + Cadastrar aluno
+                    </button>
+                </div>
+            </form>
+        </section>
 
-        <h2>Alunos cadastrados</h2>
+        <section class="painel-interno" aria-labelledby="titulo-lista">
+            <div class="painel-cabecalho">
+                <span class="secao-etiqueta">REGISTROS</span>
+                <h2 id="titulo-lista">Alunos cadastrados</h2>
+                <p>Consulte e gerencie os alunos registrados no sistema.</p>
+            </div>
 
-        {% if alunos %}
-            <ul>
-                {% for aluno in alunos %}
-                    <li class="item-aluno">
-                        <div class="dados-aluno">
-                            <strong>{{ aluno.nome }}</strong> -
-                            {{ aluno.idade }} anos -
-                            Responsável: {{ aluno.responsavel }}
-                        </div>
+            {% if alunos %}
+                <ul class="lista-alunos">
+                    {% for aluno in alunos %}
+                        <li class="item-aluno">
+                            <div class="dados-aluno">
+                                <div class="avatar-aluno" aria-hidden="true">
+                                    {{ aluno.nome[0] | upper }}
+                                </div>
 
-                        <div class="acoes-aluno">
-                            <a class="botao-editar"
-                               href="{{ url_for('editar_aluno', id=aluno.id) }}">
-                                Editar
-                            </a>
+                                <div class="informacoes-aluno">
+                                    <strong>{{ aluno.nome }}</strong>
+                                    <span>{{ aluno.idade }} anos</span>
+                                    <span>Responsável: {{ aluno.responsavel }}</span>
+                                </div>
+                            </div>
 
-                            <form method="POST"
-                                  action="{{ url_for('excluir_aluno', id=aluno.id) }}"
-                                  onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');">
+                            <div class="acoes-aluno">
+                                <a class="botao-editar"
+                                   href="{{ url_for('editar_aluno', id=aluno.id) }}">
+                                    Editar
+                                </a>
 
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <form method="POST"
+                                      action="{{ url_for('excluir_aluno', id=aluno.id) }}"
+                                      onsubmit="return confirm('Tem certeza que deseja excluir este aluno?');">
 
-                                <button class="botao-excluir" type="submit">
-                                    Excluir
-                                </button>
-                            </form>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nenhum aluno cadastrado ainda.</p>
-        {% endif %}
+                                    <input type="hidden" name="csrf_token"
+                                           value="{{ csrf_token() }}">
 
-        <p><a href="{{ url_for('index') }}">Voltar para a página inicial</a></p>
+                                    <button class="botao-excluir" type="submit">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="estado-vazio">
+                    <span aria-hidden="true">📚</span>
+                    <h3>Nenhum aluno cadastrado</h3>
+                    <p>Utilize o formulário acima para realizar o primeiro cadastro.</p>
+                </div>
+            {% endif %}
+        </section>
+
     </main>
+
+    <footer class="rodape-inicial">
+        <p>Projeto Include • Tecnologia a serviço da educação e da inclusão.</p>
+    </footer>
+
 </body>
 </html>

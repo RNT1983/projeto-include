@@ -4,81 +4,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos - Projeto Include</title>
+    <title>Gestão de Cursos | Projeto Include</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header>
-        <h1>Projeto Include</h1>
-        <p>Cadastro de Cursos e Formações</p>
+
+<body class="pagina-interna">
+
+    <header class="cabecalho-interno">
+        <div class="cabecalho-conteudo">
+            <a class="marca-interna" href="{{ url_for('index') }}">
+                <span class="marca-simbolo">✦</span>
+                <span>Projeto Include</span>
+            </a>
+
+            <div class="acoes-cabecalho">
+                <a href="{{ url_for('index') }}">Início</a>
+                <a href="{{ url_for('alunos') }}">Alunos</a>
+
+                <form method="POST" action="{{ url_for('logout') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="botao-sair">
+                        Sair do sistema
+                    </button>
+                </form>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <h2>Novo Curso</h2>
-        <p>Cadastre as formações oferecidas pela instituição.</p>
+    <main class="conteudo-interno">
 
-        <form id="form-aluno" method="POST" action="{{ url_for('cursos') }}">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <section class="banner-interno" aria-labelledby="titulo-cursos">
+            <div>
+                <span class="etiqueta-interna">GESTÃO EDUCACIONAL</span>
+                <h1 id="titulo-cursos">Gestão de Cursos</h1>
+                <p>
+                    Organize as formações oferecidas pela instituição
+                    e amplie as oportunidades de aprendizagem.
+                </p>
+            </div>
 
-            <label for="nome">Nome do curso *</label>
-            <input type="text" id="nome" name="nome" required>
+            <div class="banner-imagem">
+                <img
+                    src="{{ url_for('static', filename='images/estudantes-include.png') }}"
+                    alt="Estudantes participando de atividades educacionais inclusivas">
+            </div>
+        </section>
 
-            <label for="descricao">Descrição (opcional)</label>
-            <input type="text" id="descricao" name="descricao"
-                   placeholder="Descreva brevemente o curso">
+        <section class="painel-interno" aria-labelledby="titulo-cadastro-curso">
 
-            <label for="carga_horaria">Carga horária em horas (opcional)</label>
-            <input type="number" id="carga_horaria" name="carga_horaria"
-                   min="1" placeholder="Ex.: 40">
+            <span class="etiqueta-interna">CADASTRO</span>
+            <h2 id="titulo-cadastro-curso">Cadastrar novo curso</h2>
+            <p>
+                Preencha os dados abaixo. Apenas o nome do curso é obrigatório.
+            </p>
 
-            <button type="submit">Cadastrar curso</button>
-        </form>
+            <form id="form-curso" method="POST" action="{{ url_for('cursos') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-        <hr>
+                <div class="grupo-campos">
 
-        <h2>Cursos cadastrados</h2>
+                    <div class="campo-formulario campo-largo">
+                        <label for="nome">Nome do curso *</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            required
+                            placeholder="Ex.: Informática Básica">
+                    </div>
 
-        {% if cursos %}
-            <ul>
-                {% for curso in cursos %}
-                    <li class="item-aluno">
-                        <div class="dados-aluno">
-                            <strong>{{ curso.nome }}</strong>
+                    <div class="campo-formulario campo-largo">
+                        <label for="descricao">Descrição (opcional)</label>
+                        <input
+                            type="text"
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Descreva brevemente o curso">
+                    </div>
 
-                            {% if curso.descricao %}
-                                <p>{{ curso.descricao }}</p>
-                            {% endif %}
+                    <div class="campo-formulario">
+                        <label for="carga_horaria">
+                            Carga horária em horas (opcional)
+                        </label>
+                        <input
+                            type="number"
+                            id="carga_horaria"
+                            name="carga_horaria"
+                            min="1"
+                            placeholder="Ex.: 40">
+                    </div>
 
-                            {% if curso.carga_horaria %}
-                                <p>Carga horária: {{ curso.carga_horaria }} horas</p>
-                            {% endif %}
-                        </div>
+                </div>
 
-                        <div class="acoes-aluno">
-                            <a class="botao-editar"
-                               href="{{ url_for('editar_curso', id=curso.id) }}">
-                                Editar
-                            </a>
+                <button type="submit">Cadastrar curso</button>
+            </form>
 
-                            <form method="POST"
-                                  action="{{ url_for('excluir_curso', id=curso.id) }}"
-                                  onsubmit="return confirm('Tem certeza que deseja excluir este curso?');">
+        </section>
 
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <section class="painel-interno" aria-labelledby="titulo-lista-cursos">
 
-                                <button class="botao-excluir" type="submit">
-                                    Excluir
-                                </button>
-                            </form>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nenhum curso cadastrado ainda.</p>
-        {% endif %}
+            <span class="etiqueta-interna">CATÁLOGO</span>
+            <h2 id="titulo-lista-cursos">Cursos cadastrados</h2>
+            <p>Consulte e gerencie as formações disponíveis.</p>
 
-        <p><a href="{{ url_for('index') }}">Voltar para a página inicial</a></p>
+            {% if cursos %}
+
+                <ul class="lista-alunos">
+                    {% for curso in cursos %}
+
+                        <li class="item-aluno">
+
+                            <div class="avatar-aluno" aria-hidden="true">
+                                {{ curso.nome[0] | upper }}
+                            </div>
+
+                            <div class="informacoes-aluno">
+                                <strong>{{ curso.nome }}</strong>
+
+                                {% if curso.descricao %}
+                                    <p>{{ curso.descricao }}</p>
+                                {% endif %}
+
+                                {% if curso.carga_horaria %}
+                                    <p>
+                                        Carga horária:
+                                        {{ curso.carga_horaria }} horas
+                                    </p>
+                                {% endif %}
+                            </div>
+
+                            <div class="acoes-aluno">
+                                <a
+                                    class="botao-editar"
+                                    href="{{ url_for('editar_curso', id=curso.id) }}">
+                                    Editar
+                                </a>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('excluir_curso', id=curso.id) }}"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este curso?');">
+
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        value="{{ csrf_token() }}">
+
+                                    <button class="botao-excluir" type="submit">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+
+                        </li>
+
+                    {% endfor %}
+                </ul>
+
+            {% else %}
+
+                <div class="estado-vazio">
+                    <h3>Nenhum curso cadastrado ainda</h3>
+                    <p>
+                        Cadastre a primeira formação para iniciar
+                        a organização do catálogo.
+                    </p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+        <p>
+            <a href="{{ url_for('index') }}">
+                Voltar para a página inicial
+            </a>
+        </p>
+
     </main>
+
 </body>
 </html>
