@@ -24,20 +24,29 @@ def create_app():
     # Reconhece o HTTPS encaminhado pelo proxy do GitHub Codespaces.
     # Usar somente atrás de um proxy confiável.
     app.wsgi_app = ProxyFix(
-    app.wsgi_app,
-    x_proto=1,
-    x_host=1
-)
+        app.wsgi_app,
+        x_proto=1,
+        x_host=1
+    )
 
     # Configuração da chave de segurança da aplicação.
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
     # Configuração do banco de dados.
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    database_url = os.environ.get(
         "DATABASE_URL",
         "sqlite:///projeto_include.db"
     )
 
+    # Utiliza o driver psycopg2 nas conexões PostgreSQL.
+    if database_url.startswith("postgresql://"):
+        database_url = database_url.replace(
+            "postgresql://",
+            "postgresql+psycopg2://",
+            1
+        )
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # Proteção CSRF ativada para requisições POST.
