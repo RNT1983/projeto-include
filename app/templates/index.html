@@ -4,52 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Include</title>
+    <meta name="theme-color" content="#123d68">
+    <meta name="description" content="Projeto Include: gestão educacional simples e acessível para organizações sociais.">
+    <title>Projeto Include | Gestão Educacional</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    <header>
-        <h1>Projeto Include</h1>
-        <p>Educação mais acessível para todos.</p>
+
+<body class="pagina-inicial">
+
+    <header class="cabecalho-inicial">
+        <div class="cabecalho-conteudo">
+            <a class="marca" href="{{ url_for('index') }}" aria-label="Projeto Include - Página inicial">
+                <span class="marca-simbolo" aria-hidden="true">✦</span>
+                <span>Projeto <strong>Include</strong></span>
+            </a>
+            <span class="cabecalho-legenda">Gestão educacional inclusiva</span>
+        </div>
     </header>
 
-    <main>
-        <h2>Bem-vindo ao Projeto Include!</h2>
-        <p>Sistema de organização de alunos, turmas, cursos e frequência.</p>
+    <main class="inicio-conteudo">
 
-        <section aria-labelledby="acessibilidade-titulo">
-            <h3 id="acessibilidade-titulo">Acessibilidade</h3>
+        <section class="hero" aria-labelledby="titulo-principal">
+            <div class="hero-texto">
+                <span class="etiqueta">TECNOLOGIA PARA INCLUSÃO</span>
+                <h1 id="titulo-principal">
+                    Educação que conecta.<br>
+                    <span>Inclusão que transforma.</span>
+                </h1>
+                <p>
+                    Uma plataforma simples e acessível para apoiar
+                    a organização de alunos, cursos e atividades educacionais.
+                </p>
+                <a class="botao-principal" href="#modulos">
+                    Explorar o sistema <span aria-hidden="true">→</span>
+                </a>
+            </div>
 
-            <button type="button" id="diminuir-fonte" aria-label="Diminuir tamanho da fonte">
-                A-
-            </button>
 
-            <button type="button" id="aumentar-fonte" aria-label="Aumentar tamanho da fonte">
-                A+
-            </button>
+            <div class="hero-ilustracao">
+                    <img
+                        src="{{ url_for('static', filename='images/estudantes-include.png') }}"
+                        alt="Estudantes com diferentes necessidades de acessibilidade colaborando em atividades educacionais"
+                        class="imagem-estudantes"
+    >
+            </div>
 
-            <button type="button" id="restaurar-fonte">
-                Restaurar
-            </button>
-
-            <p id="mensagem-acessibilidade" aria-live="polite">
-                Tamanho do texto padrão.
-            </p>
         </section>
 
-        <nav aria-label="Menu principal">
-            <ul>
-                <li><a href="{{ url_for('alunos') }}">Alunos</a></li>
-                <li><a href="#">Turmas</a></li>
-                <li><a href="{{ url_for('cursos') }}">Cursos</a></li>
-                <li><a href="#">Frequência</a></li>
-            </ul>
-        </nav>
+        <section class="secao-modulos" id="modulos" aria-labelledby="titulo-modulos">
+            <div class="secao-cabecalho">
+                <span class="secao-etiqueta">NOSSA PLATAFORMA</span>
+                <h2 id="titulo-modulos">Tudo organizado em um só lugar</h2>
+                <p>Escolha uma das áreas disponíveis para começar.</p>
+            </div>
+
+            <nav class="navegacao-modulos" aria-label="Menu principal">
+                <ul class="grade-modulos">
+
+                    <li>
+                        <a class="card-modulo" href="{{ url_for('alunos') }}">
+                            <span class="icone-modulo icone-alunos" aria-hidden="true">♙</span>
+                            <span class="card-titulo">Alunos</span>
+                            <span class="card-descricao">
+                                Cadastre, consulte e atualize os dados dos alunos.
+                            </span>
+                            <span class="card-acao">Acessar módulo →</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="card-modulo" href="{{ url_for('cursos') }}">
+                            <span class="icone-modulo icone-cursos" aria-hidden="true">▤</span>
+                            <span class="card-titulo">Cursos</span>
+                            <span class="card-descricao">
+                                Organize as formações e os cursos oferecidos.
+                            </span>
+                            <span class="card-acao">Acessar módulo →</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <div class="card-modulo card-indisponivel">
+                            <span class="icone-modulo icone-turmas" aria-hidden="true">▦</span>
+                            <span class="card-titulo">Turmas</span>
+                            <span class="card-descricao">
+                                Organização de alunos por turmas e cursos.
+                            </span>
+                            <span class="selo-breve">Em desenvolvimento</span>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="card-modulo card-indisponivel">
+                            <span class="icone-modulo icone-frequencia" aria-hidden="true">✓</span>
+                            <span class="card-titulo">Frequência</span>
+                            <span class="card-descricao">
+                                Acompanhamento da presença dos alunos.
+                            </span>
+                            <span class="selo-breve">Em desenvolvimento</span>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+        </section>
+
+        <section class="acessibilidade-inicial" aria-labelledby="acessibilidade-titulo">
+            <div>
+                <span class="secao-etiqueta">ACESSIBILIDADE</span>
+                <h2 id="acessibilidade-titulo">Uma experiência para todos</h2>
+                <p>Personalize o tamanho do texto para facilitar a leitura.</p>
+            </div>
+
+            <div class="controles-acessibilidade">
+                <div class="botoes-acessibilidade">
+                    <button type="button" id="diminuir-fonte" aria-label="Diminuir tamanho da fonte">A−</button>
+                    <button type="button" id="aumentar-fonte" aria-label="Aumentar tamanho da fonte">A+</button>
+                    <button type="button" id="restaurar-fonte">Restaurar</button>
+                </div>
+                <p id="mensagem-acessibilidade" aria-live="polite">
+                    Tamanho do texto padrão.
+                </p>
+            </div>
+        </section>
+
     </main>
+
+    <footer class="rodape-inicial">
+        <p>Projeto Include • Tecnologia a serviço da educação e da inclusão.</p>
+    </footer>
 
     <script>
         let tamanhoFonte = 16;
-
         const mensagem = document.getElementById("mensagem-acessibilidade");
 
         function atualizarFonte() {
@@ -76,5 +162,6 @@
             atualizarFonte();
         });
     </script>
+
 </body>
 </html>
